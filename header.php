@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://r.mobirisesite.com/1137313/assets/theme/css/style.css?rnd=1737894518537">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="https://r.mobirisesite.com/1137313/assets/css/mbr-additional.css?rnd=1737894518537" type="text/css">
-   <link rel="stylesheet" href="frontend\css\admin_dashboard.css">
+  <link rel="stylesheet" href="frontend\css\header.css">
 
 </head>
 <body>
@@ -22,37 +22,38 @@
 <section data-bs-version="5.1" class="menu menu1 careerm5 cid-uAZlXssoJO" once="menu" id="menu-1-uAZlXssoJO">
     <nav class="navbar navbar-dropdown navbar-expand-lg">
         <div class="menu_box container-fluid">
-             <div class="logo">
-                  <img src="images/lapssii.png" alt="Logo du laboratoire PSSII">
-              </div>
+            <div class="logo">
+                <img src="images/lapssii.png" alt="Logo du laboratoire PSSII">
+            </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-brand d-none d-lg-flex">
                 </div>
                 <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
                     <li class="nav-item"><a class="nav-link link text-black display-4" href="index.php">Accueil</a></li>
-                      <li class="nav-item"><a class="nav-link link text-black display-4 dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Le Laboratoire</a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                         <a class="dropdown-item" href="projets.php">Projets</a>
-                            <a class="dropdown-item" href="publications.php">Publications</a>
-                           <a class="dropdown-item" href="membres.php">Membres</a>
-                       </div>
-                      </li>
+                    <li class="nav-item"><a class="nav-link link text-black display-4" href="projets.php">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black display-4" href="publications.php">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black display-4" href="membres.php">Membres</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black display-4" href="contact.php">Contact</a></li>
+                    
                       
-                     <li class="nav-item"><a class="nav-link link text-black display-4" href="contact.html">Contact</a></li>
-                     <li class="nav-item"><a class="nav-link link text-black display-4" href="a-propos.html">À Propos</a></li>
-                    <?php
+                 <?php
                       
-                      if (!isLoggedIn()) {
-                          echo '<li class="nav-item"><a class="nav-link link text-black display-4 login-button" href="login.php">Accès sécurisé</a></li>';
-                      } else {
-                          if($_SESSION['user_role'] === 'administrateur'){
-                              echo '<li class="nav-item"><a class="nav-link link text-black display-4" href="admin_dashboard.php">Tableau de Bord</a></li>';
+                    if (!isLoggedIn()) {
+                        echo '<li class="nav-item"><a class="nav-link link text-black display-4 login-button" href="login.php">Accès sécurisé</a></li>';
+                    } else {
+                        if($_SESSION['user_role'] === 'administrateur'){
+                            echo '<li class="nav-item"><a class="nav-link link text-black display-4" href="admin_dashboard.php">Tableau de Bord</a></li>';
+                          } else {
+                            if($_SESSION['user_role'] !== 'administrateur'){
+                                 echo  '<li class="nav-item"><a class="nav-link link text-black display-4" href="membre_dashboard.php">Tableau de Bord</a></li>';
+                             }
                             }
-                          
-                            echo '<li class="nav-item"><a class="nav-link link text-black display-4" href="logout.php">Déconnexion</a></li>';
-                      }
-                     ?>
-                  </ul>
+                             echo '<li class="nav-item"><a class="nav-link link text-black display-4" href="logout.php">Déconnexion</a></li>';
+                         }
+                   
+                   ?>
+                 </ul>
+
 
                 <div class="mbr-section-btn-main" role="tablist">
                     <a class="btn btn-black-outline display-4" href="#">
@@ -72,7 +73,7 @@
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
-                            
+
                             <h3 class="mbr-section-subtitle mbr-fonts-style display-5">PSSII</h3>
                             <div class="offcanvas_contact">
                                 <p class="mbr-text mbr-fonts-style display-7">Plateforme dynamique pour les chercheurs et partenaires du laboratoire PSSII.</p>
@@ -82,7 +83,7 @@
                                     <a href="tel:+33 1 23 45 67 89" class="text-black">+33 1 23 45 67 89</a>
                                 </p>
                             </div>
-                            
+
                             <div class="mbr-section-btn"><a class="btn btn-black-outline display-4" href="#">
                                     <span class="mobi-mbri mobi-mbri-right mbr-iconfont mbr-iconfont-btn"></span>
                                     Rejoignez-nous
