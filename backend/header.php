@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://r.mobirisesite.com/1137313/assets/theme/css/style.css?rnd=1737894518537">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="https://r.mobirisesite.com/1137313/assets/css/mbr-additional.css?rnd=1737894518537" type="text/css">
-  <link rel="stylesheet" href="frontend\css\header.css">
+  <link rel="stylesheet" href="..\frontend\css\header.css">
 
 </head>
 <body>
@@ -23,7 +23,7 @@
     <nav class="navbar navbar-dropdown navbar-expand-lg">
         <div class="menu_box container-fluid">
             <div class="logo">
-                <img src="images/lapssii.png" alt="Logo du laboratoire PSSII">
+                <img src="..\images\lapssii.png" alt="Logo du laboratoire PSSII">
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-brand d-none d-lg-flex">
