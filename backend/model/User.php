@@ -27,7 +27,8 @@ class User {
     }
 
     public function getPassword(): string {
-        return $this->password;
+        return $this->password
+        ;
     }
 
     public function verifyPassword(string $password): bool {

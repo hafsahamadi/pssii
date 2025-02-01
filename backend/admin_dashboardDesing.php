@@ -61,218 +61,35 @@
 
 
   if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'edit_projet'){
-      if (hasPermission('modifier_projet', $_SESSION['user_role'])) {
-         $projet_id = $_POST['projet_id'];
-             $titre = $_POST['titre'];
-           $description = $_POST['description'];
-           $date_debut = $_POST['date_debut'];
-          $date_fin = $_POST['date_fin'];
-            $financements = $_POST['financements'];
-             $delete = isset($_POST['delete']) ? true : false;
-
-            $conn = connectDB();
-         if ($delete) {
-                $sql = "DELETE FROM projets WHERE id = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $projet_id);
-                  if($stmt->execute())
-               {
-                      $msg = "Projet supprimé";
-                }
-                  else
-                  {
-                    $msg = "Problème lors de la suppression du projet";
-                  }
-           }
-           else {
-                 $sql = "UPDATE projets SET titre = ?, description = ?, date_debut = ?, date_fin = ?, financements = ? WHERE id = ?";
-                  $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("sssssi", $titre, $description, $date_debut, $date_fin, $financements,$projet_id);
-                   if($stmt->execute())
-                     {
-                       $msg = 'Projet modifié';
-                      }
-                   else
-                      {
-                         $msg = 'Erreur lors de la modification du projet';
-                     }
-            }
-           $conn->close();
-     }
-         else
-          {
-             $msg = "Vous n'avez pas les droits pour cette action";
-        }
+     
+    $projet_id = $_POST['projet_id'];
+    $titre = $_POST['titre'];
+    $description = $_POST['description'];
+    //$date_debut = $_POST['date_debut'];
+    $date_fin = $_POST['date_fin'];
+    $financements = $_POST['financements'];
+    $delete = isset($_POST['delete']) ? true : false;
+    $projet = new Projet( $projet_id, $titre,$description,[],$financements,);
+      
   }
-        
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  // Gestion des publications
-  if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'add_publication'){
-             if (hasPermission('ajouter_publication', $_SESSION['user_role'])) {
-                 $titre = $_POST['titre'];
-                 $auteurs = $_POST['auteurs'];
-               $type = $_POST['type'];
-                 $date = $_POST['date'];
-                $lien = $_POST['lien'];
-                  $resume = $_POST['resume'];
-
-                 $conn = connectDB();
-                    $sql = "INSERT INTO publications (titre, auteurs, type, date, lien, resume) VALUES (?, ?, ?, ?, ?, ?)";
-                     $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("ssssss", $titre, $auteurs, $type, $date, $lien, $resume);
-                   if($stmt->execute())
-                    {
-                          $msg = 'Publication ajoutée';
-                    }
-                      else
-                   {
-                         $msg = 'Erreur lors de l\'ajout de la publication';
-                    }
-                       $conn->close();
-             }
-              else
-                {
-                     $msg = "Vous n'avez pas les droits pour cette action";
-                }
-         }
   if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'edit_publication'){
-         if (hasPermission('modifier_publication', $_SESSION['user_role'])) {
-            $publication_id = $_POST['publication_id'];
-            $titre = $_POST['titre'];
-            $auteurs = $_POST['auteurs'];
-             $type = $_POST['type'];
-             $date = $_POST['date'];
-              $lien = $_POST['lien'];
-               $resume = $_POST['resume'];
-            $delete = isset($_POST['delete']) ? true : false;
 
-           $conn = connectDB();
-            if ($delete) {
-                 $sql = "DELETE FROM publications WHERE id = ?";
-                 $stmt = $conn->prepare($sql);
-                   $stmt->bind_param("i", $publication_id);
-                  if($stmt->execute())
-                     {
-                           $msg = "Publication supprimée";
-                      }
-                else
-                   {
-                       $msg =  "Problème lors de la suppression de la publication";
-                   }
-            }
-              else {
-                     $sql = "UPDATE publications SET titre = ?, auteurs = ?, type = ?, date = ?, lien = ?, resume = ? WHERE id = ?";
-                     $stmt = $conn->prepare($sql);
-                      $stmt->bind_param("ssssssi", $titre, $auteurs, $type, $date, $lien, $resume, $publication_id);
-                    if($stmt->execute())
-                      {
-                          $msg =  "Publication modifié";
-                     }
-                   else
-                     {
-                       $msg = "Erreur lors de la modification de la publication";
-                    }
-             }
-            $conn->close();
-       }
-         else
-           {
-             $msg = "Vous n'avez pas les droits pour cette action";
-           }
+  }
 
-    }
+
     // Gestion des membres
-    if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'add_membre'){
-         if (hasPermission('modifier_membre', $_SESSION['user_role'])) {
-            $nom = $_POST['nom'];
-            $prenom = $_POST['prenom'];
-           $email = $_POST['email'];
-            $mot_de_passe = $_POST['mot_de_passe'];
-             $role = $_POST['role'];
-             $axe_recherche_id = $_POST['axe_recherche'];
-            $conn = connectDB();
-              $hashed_password = password_hash($mot_de_passe, PASSWORD_DEFAULT);
-               $sql = "INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, role, axe_recherche_id, statut) VALUES (?, ?, ?, ?, ?, ?, 'actif')";
-               $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sssssi", $nom, $prenom, $email, $hashed_password, $role, $axe_recherche_id);
+  if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'add_membre'){
+        
+  }
 
-              if ($stmt->execute()) {
-                    $msg = 'Membre ajouté';
-              }
-               else
-              {
-                     $msg =  'Erreur lors de l\'ajout du membre';
-               }
-              $conn->close();
-        }
-      else
-         {
-               $msg = "Vous n'avez pas les droits pour cette action";
-          }
 
-    }
-    if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'edit_membre'){
-      if (hasPermission('modifier_membre', $_SESSION['user_role'])) {
-           $membre_id = $_POST['membre_id'];
-          $nom = isset($_POST['nom']) ? $_POST['nom'] : '';
-          $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : '';
-          $role = isset($_POST['role']) ? $_POST['role'] : '';
-          $axe_recherche_id = isset($_POST['axe_recherche']) && is_numeric($_POST['axe_recherche']) ? $_POST['axe_recherche'] : NULL;
 
-         $delete = isset($_POST['delete']) ? true : false;
-
-         $conn = connectDB();
-         if ($delete) {
-               $sql = "DELETE FROM utilisateurs WHERE id = ?";
-                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $membre_id);
-                  if($stmt->execute())
-               {
-                    $msg =  'Membre supprimé';
-                 }
-                 else
-                   {
-                     $msg = "Erreur lors de la suppression du membre";
-                 }
-         }
-             else {
-                $sql = "UPDATE utilisateurs SET nom = ?, prenom = ?, role = ?, axe_recherche_id = ? WHERE id = ?";
-                   $stmt = $conn->prepare($sql);
-                 $stmt->bind_param("sssii", $nom, $prenom, $role, $axe_recherche_id,$membre_id);
-                if($stmt->execute())
-                   {
-                       $msg =  'Membre modifié';
-                   }
-                   else
-                 {
-                     $msg = "Erreur lors de la modification du membre";
-                }
-       }
-          $conn->close();
-     }
-      else
-        {
-          $msg = "Vous n'avez pas les droits pour cette action";
-     }
-
- }
+  if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'edit_membre'){
+     
+  }
 
  include 'header.php';
 ?>
@@ -283,26 +100,7 @@
     <div class="container">
            <h1>Tableau de bord administrateur</h1>
             <?php if ($msg !== null) echo '<p>'. $msg .'</p>'; ?>
-            <section class="admin-section">
-                <?php if (hasPermission('modifier_projet', $_SESSION['user_role'])) {
-                    ?>
-                 <!-- <h2>Ajouter un Projet</h2>
-                  <form action="admin_dashboard.php" method="post">
-                        <input type="hidden" name="action" value="add_projet">
-                          <label for="titre">Titre :</label>
-                           <input type="text" name="titre" required>
-                        <label for="description">Description :</label>
-                            <textarea name="description" required></textarea>
-                         <label for="date_debut">Date de début :</label>
-                           <input type="date" name="date_debut" required>
-                         <label for="date_fin">Date de fin :</label>
-                           <input type="date" name="date_fin" required>
-                            <label for="financements">Financements :</label>
-                         <textarea name="financements"></textarea>
-
-                            <button type="submit">Ajouter</button>
-                    </form> -->
-        </section>
+            
         <section class="admin-section">
                 <h2>Modifier/Supprimer un Projet</h2>
                 <form action="admin_dashboard.php" method="post">
@@ -325,7 +123,7 @@
                  </form>
             </section>
                 <?php
-                }
+                
                 ?>
        <!-- <section class="admin-section">
                  <h2>Ajouter une Publication</h2>

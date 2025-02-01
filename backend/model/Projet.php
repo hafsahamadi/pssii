@@ -1,19 +1,33 @@
 <?php
 class Projet {
+
     private string $description;
+    private string $titre;
+    private int $projet_id;
     private array $membresImpliques;
     private float $financements;
     private array $livrables;
 
-    public function __construct(string $description, array $membresImpliques, float $financements, array $livrables) {
+    public function __construct(int $projet_id,String $titre,String $description, array $membresImpliques, float $financements) {
+       
+       
+        $this->projet_id = $projet_id;
+        $this->titre = $titre;
         $this->description = $description;
         $this->membresImpliques = $membresImpliques;
         $this->financements = $financements;
-        $this->livrables = $livrables;
     }
 
     public function getDescription(): string {
         return $this->description;
+    }
+
+    public function getTitre(): string {
+        return $this->titre;
+    }
+
+    public function getprojet_id(): int {
+        return $this->projet_id;
     }
 
     public function getMembresImpliques(): array {
