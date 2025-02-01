@@ -31,33 +31,35 @@
     $msg = null;
     // Traitement des actions des formulaires
     // Gestion des projets
-        if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'add_projet'){
-            if (hasPermission('modifier_projet', $_SESSION['user_role'])) {
-                $titre = $_POST['titre'];
-               $description = $_POST['description'];
-                $date_debut = $_POST['date_debut'];
-               $date_fin = $_POST['date_fin'];
-                $financements = $_POST['financements'];
+        // if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'add_projet'){
+        //     if (hasPermission('modifier_projet', $_SESSION['user_role'])) {
+        //         $titre = $_POST['titre'];
+        //        $description = $_POST['description'];
+        //         $date_debut = $_POST['date_debut'];
+        //        $date_fin = $_POST['date_fin'];
+        //         $financements = $_POST['financements'];
 
-               $conn = connectDB();
-                 $sql = "INSERT INTO projets (titre, description, date_debut, date_fin, financements) VALUES (?, ?, ?, ?, ?)";
-                 $stmt = $conn->prepare($sql);
-                 $stmt->bind_param("sssss", $titre, $description, $date_debut, $date_fin, $financements);
-                 if($stmt->execute())
-                 {
-                   $msg = 'Projet ajouté';
-                   }
-                 else
-                 {
-                       $msg = 'Erreur lors de l\'ajout de projet';
-                 }
-                $conn->close();
-         }
-         else
-            {
-               $msg = "Vous n'avez pas les droits pour cette action";
-           }
- }
+        //        $conn = connectDB();
+        //          $sql = "INSERT INTO projets (titre, description, date_debut, date_fin, financements) VALUES (?, ?, ?, ?, ?)";
+        //          $stmt = $conn->prepare($sql);
+        //          $stmt->bind_param("sssss", $titre, $description, $date_debut, $date_fin, $financements);
+        //          if($stmt->execute())
+        //          {
+        //            $msg = 'Projet ajouté';
+        //            }
+        //          else
+        //          {
+        //                $msg = 'Erreur lors de l\'ajout de projet';
+        //          }
+        //         $conn->close();
+        //  }
+        //  else
+        //     {
+        //        $msg = "Vous n'avez pas les droits pour cette action";
+        //    }
+// }
+
+
   if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'edit_projet'){
       if (hasPermission('modifier_projet', $_SESSION['user_role'])) {
          $projet_id = $_POST['projet_id'];
@@ -102,8 +104,27 @@
              $msg = "Vous n'avez pas les droits pour cette action";
         }
   }
-        // Gestion des publications
-        if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'add_publication'){
+        
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // Gestion des publications
+  if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['action'] == 'add_publication'){
              if (hasPermission('ajouter_publication', $_SESSION['user_role'])) {
                  $titre = $_POST['titre'];
                  $auteurs = $_POST['auteurs'];
@@ -265,7 +286,7 @@
             <section class="admin-section">
                 <?php if (hasPermission('modifier_projet', $_SESSION['user_role'])) {
                     ?>
-                 <h2>Ajouter un Projet</h2>
+                 <!-- <h2>Ajouter un Projet</h2>
                   <form action="admin_dashboard.php" method="post">
                         <input type="hidden" name="action" value="add_projet">
                           <label for="titre">Titre :</label>
@@ -280,7 +301,7 @@
                          <textarea name="financements"></textarea>
 
                             <button type="submit">Ajouter</button>
-                    </form>
+                    </form> -->
         </section>
         <section class="admin-section">
                 <h2>Modifier/Supprimer un Projet</h2>
@@ -306,7 +327,7 @@
                 <?php
                 }
                 ?>
-       <section class="admin-section">
+       <!-- <section class="admin-section">
                  <h2>Ajouter une Publication</h2>
                   <?php if (hasPermission('ajouter_publication', $_SESSION['user_role'])) { ?>
                  <form action="admin_dashboard.php" method="post">
@@ -325,7 +346,7 @@
                         <textarea name="resume" required></textarea>
                      <button type="submit">Ajouter</button>
                  </form>
-            </section>
+            </section> -->
                 <?php } ?>
      <section class="admin-section">
                 <h2>Modifier/Supprimer une Publication</h2>

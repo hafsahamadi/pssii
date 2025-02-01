@@ -18,7 +18,7 @@
 
          $sql = "INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, role, axe_recherche_id, statut) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-         $stmt->bind_param("sssssis",  $user->getName(), $user->getPrenom(), $user->getEmail(), $hashed_password, $user->getMembre(), 'en attente');
+         $stmt->bind_param("sssssis",  $user->getName(), $user->getPrenom(), $user->getEmail(), $hashed_password, 'en attente');
 
          if ($stmt->execute()) {
              $stmt->close();
