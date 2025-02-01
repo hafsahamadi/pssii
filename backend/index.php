@@ -1,6 +1,6 @@
 <?php
-    include_once 'core.php';
-    include_once 'auth.php';
+   require_once "../config/database.php";
+   require_once "../auth/database.php";
    
 ?>
 <!DOCTYPE html>
