@@ -6,13 +6,10 @@ include_once 'core.php';
 include_once 'auth.php';
 $msg = null;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $email = $_POST['email'];
-    $mot_de_passe = $_POST['mot_de_passe'];
-    $role = $_POST['role'];
+  
      $axe_recherche_id = $_POST['axe_recherche'];
-    $msg =  registerUser($nom, $prenom, $email, $mot_de_passe, $role, $axe_recherche_id);
+     $user = new User($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['mot_de_passe'],$_POST['member']);
+    registerUser( $user);
   }
 ?>
 <!DOCTYPE html>
@@ -36,11 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="email" required>
             <label for="mot_de_passe">Mot de passe :</label>
             <input type="password" name="mot_de_passe" required>
-            <label for="role">Rôle :</label>
-                <select name="role" required>
+            <label for="member">Membre :</label>
+                <select name="member" required>
                   <option value="chercheur">Chercheur</option>
                    <option value="doctorant">Doctorant</option>
-                 <option value="administrateur">Administrateur</option>
                   <option value="partenaire">Partenaire</option>
                  </select>
 

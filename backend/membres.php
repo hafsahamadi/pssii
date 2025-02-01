@@ -1,10 +1,7 @@
 <?php
     include_once 'core.php';
     include_once 'auth.php';
-       if (!isLoggedIn()) {
-            header('Location: login.php');
-             exit();
-      }
+       
 ?>
 <!DOCTYPE html>
 <html >

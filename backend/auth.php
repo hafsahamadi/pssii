@@ -1,22 +1,24 @@
 <?php
     include_once 'config.php';
+    include_once 'model\User.php';
 
-    function registerUser($nom, $prenom, $email, $mot_de_passe, $role, $axe_recherche_id) {
+  function registerUser(User $user) {
         $conn = connectDB();
             $sql = "SELECT email FROM utilisateurs WHERE email = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $email);
+            $stmt->bind_param("s", $user->getEmail());
              $stmt->execute();
              $result = $stmt->get_result();
              if($result->num_rows > 0)
             {
                 return "Cet email est déjà pris";
             }
-            $hashed_password = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+            $hashed_password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+
 
          $sql = "INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, role, axe_recherche_id, statut) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-         $stmt->bind_param("sssssis", $nom, $prenom, $email, $hashed_password, $role, $axe_recherche_id, 'en attente');
+         $stmt->bind_param("sssssis",  $user->getName(), $user->getPrenom(), $user->getEmail(), $hashed_password, $user->getMembre(), 'en attente');
 
          if ($stmt->execute()) {
              $stmt->close();
@@ -29,7 +31,8 @@
         }
      }
 
-    function loginUser($email, $mot_de_passe) {
+   
+  function loginUser($email, $mot_de_passe) {
           $conn = connectDB();
             $sql = "SELECT id, mot_de_passe, role, statut FROM utilisateurs WHERE email = ?";
             $stmt = $conn->prepare($sql);
@@ -75,13 +78,17 @@
         return isset($_SESSION['user_id']);
     }
 
-        function logoutUser() {
+  
+  function logoutUser() {
             session_unset();
           session_destroy();
-        header('Location: index.php?logout=1');
+       
+          header('Location: index.php?logout=1');
           exit();
         }
- function hasPermission($permission, $role) {
+ 
+  
+  function hasPermission($permission, $role) {
       // Les permissions de l'administrateur.
       if ($role === 'administrateur') {
            return true;
