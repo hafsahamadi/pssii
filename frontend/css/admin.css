@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #6C63FF;
+    color: white;
+    position: fixed;
+}
+
+.sidebar .nav-link {
+    color: white;
+    padding: 10px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+}
